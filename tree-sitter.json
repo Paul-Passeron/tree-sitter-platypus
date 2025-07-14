@@ -1,0 +1,37 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "platypus",
+      "camelcase": "Platypus",
+      "title": "Platypus",
+      "scope": "source.platypus",
+      "file-types": ["plt"],
+      "injection-regex": "^platypus$",
+      "class-name": "TreeSitterPlatypus"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Platypus concatenative language parser",
+    "authors": [
+      {
+        "name": "Paul Passeron",
+        "email": "paul.passeron2@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/Paul-Passeron/tree-sitter-platypus"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
