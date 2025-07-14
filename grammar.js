@@ -1,38 +1,45 @@
 module.exports = grammar({
-    name: "platypus",
+  name: "platypus",
 
-    rules: {
-        source_file: ($) => repeat($._statement),
+  rules: {
+    source_file: ($) => repeat($._statement),
 
-        _statement: ($) =>
-            choice(
-                $.number,
-                $.string,
-                $.word,
-                $.comment,
-                $.if_statement,
-                $.while_statement,
-                $.do_statement,
-            ),
+    _statement: ($) =>
+      choice(
+        $.number,
+        $.string,
+        $.word,
+        $.comment,
+        $.op,
+        $.if_statement,
+        $.while_statement,
+      ),
 
-        number: ($) => /\d+/,
+    number: ($) => /\d+/,
 
-        string: ($) => /"[^"]*"/,
+    string: ($) => /"[^"]*"/,
 
-        word: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    word: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
-        comment: ($) => /#.*/,
+    comment: ($) => /\/\/.*/,
 
-        if_statement: ($) =>
-            seq(
-                "if",
-                repeat($._statement),
-                optional(seq("else", repeat($._statement))),
-                "endif",
-            ),
+    if_statement: ($) =>
+      seq(
+        "if",
+        repeat($._statement),
+        optional(seq("else", repeat($._statement))),
+        "endif",
+      ),
 
-        while_statement: ($) => seq("while", repeat($._statement), "endwhile"),
+    op: ($) => /[+\-*/%]/,
 
-        do_statement: ($) => seq("do", repeat($._statement), "endwhile"),
-    },
+    while_statement: ($) =>
+      seq(
+        "while",
+        repeat($._statement),
+        "do",
+        repeat($._statement),
+        "endwhile",
+      ),
+  },
 });
